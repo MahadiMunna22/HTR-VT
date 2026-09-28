@@ -1,0 +1,6 @@
+data/iam/lines/
+data/LAM/lines/
+data/read2016/lines/
+output/
+__pycache__/
+*.log

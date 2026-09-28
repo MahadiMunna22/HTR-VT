@@ -30,6 +30,7 @@ def main():
 
     args = option.get_args_parser()
     torch.manual_seed(args.seed)
+    cudnn.benchmark = True
 
     args.save_dir = os.path.join(args.out_dir, args.exp_name)
     os.makedirs(args.save_dir, exist_ok=True)
