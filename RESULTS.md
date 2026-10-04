@@ -74,12 +74,12 @@ Checkpoints: `output/{read,lam,iam}/best_CER.pth` (and `best_WER.pth`).
 
 | Training data | CER | WER |
 |---|---|---|
-| 25% (4,957 lines) | *pending* | *pending* |
-| 50% (9,915 lines) | *pending* | *pending* |
-| 75% (14,872 lines) | *pending* | *pending* |
+| 25% (4,957 lines) | 3.86% | 10.50% |
+| 50% (9,915 lines) | 3.38% | 9.12% |
+| 75% (14,872 lines) | 3.11% | 8.45% |
 | 100% (19,830 lines, §2 above) | 3.06% | 8.28% |
 
-*(Status: running as of 2026-09-21; results to be filled in once complete.)*
+**Finding**: a clean, monotonic diminishing-returns curve. Going from 25%→50% of the data cuts CER by 0.48 points; 50%→75% only by 0.27; 75%→100% by just 0.05. Three-quarters of LAM's training data already gets to within 0.05 CER of the full-data result — the model captures most of what's learnable from a comparatively small fraction of the training set, consistent with the paper's own claim of data efficiency, and extending that claim to a dimension the paper itself never tested.
 
 ## 4. Reproducibility
 
