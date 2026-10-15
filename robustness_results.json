@@ -1,0 +1,464 @@
+[
+ {
+  "dataset": "IAM",
+  "corruption": "clean",
+  "severity": 0,
+  "cer": 0.051793177566373444,
+  "wer": 0.1636552517345008
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "blur",
+  "severity": 1.0,
+  "cer": 0.07133702185248578,
+  "wer": 0.21118242867213297
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "blur",
+  "severity": 2.0,
+  "cer": 0.5478804282927995,
+  "wer": 0.8228768597187697
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "blur",
+  "severity": 3.0,
+  "cer": 0.888739402141464,
+  "wer": 0.9759952509924684
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "rotate",
+  "severity": 2,
+  "cer": 0.07316801337419894,
+  "wer": 0.22331465885059176
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "rotate",
+  "severity": 5,
+  "cer": 0.17787684591808303,
+  "wer": 0.4547174711534894
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "rotate",
+  "severity": 10,
+  "cer": 0.6066632169724954,
+  "wer": 0.9190813638556005
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "noise",
+  "severity": 0.05,
+  "cer": 0.13432313019941886,
+  "wer": 0.36029384484101956
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "noise",
+  "severity": 0.1,
+  "cer": 0.45703936631771686,
+  "wer": 0.7960894891106741
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "noise",
+  "severity": 0.2,
+  "cer": 0.9110138120447399,
+  "wer": 0.9925054724891478
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "thicken",
+  "severity": 2,
+  "cer": 0.05723042630259125,
+  "wer": 0.17760546135866137
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "thicken",
+  "severity": 3,
+  "cer": 0.08541973490427099,
+  "wer": 0.24501910733499055
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "thicken",
+  "severity": 4,
+  "cer": 0.18528042033196673,
+  "wer": 0.4451452528475494
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "thin",
+  "severity": 2,
+  "cer": 0.058098157067229234,
+  "wer": 0.18127852187140578
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "thin",
+  "severity": 3,
+  "cer": 0.1722485371969908,
+  "wer": 0.4071160909731755
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "thin",
+  "severity": 4,
+  "cer": 0.6007005532778729,
+  "wer": 0.863577338329685
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "contrast",
+  "severity": 0.7,
+  "cer": 0.051801138399076546,
+  "wer": 0.16369235335584165
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "contrast",
+  "severity": 0.4,
+  "cer": 0.05180909923177964,
+  "wer": 0.1636552517345008
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "contrast",
+  "severity": 0.2,
+  "cer": 0.05183298172988895,
+  "wer": 0.16361815011315994
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "rotate_canvas",
+  "severity": 2,
+  "cer": 0.06285077419098038,
+  "wer": 0.19378176826327312
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "rotate_canvas",
+  "severity": 5,
+  "cer": 0.14487123353102735,
+  "wer": 0.3771750825511075
+ },
+ {
+  "dataset": "IAM",
+  "corruption": "rotate_canvas",
+  "severity": 10,
+  "cer": 0.453337579110775,
+  "wer": 0.7503431899974029
+ },
+ {
+  "dataset": "READ",
+  "corruption": "clean",
+  "severity": 0,
+  "cer": 0.03866503866503866,
+  "wer": 0.16543778801843317
+ },
+ {
+  "dataset": "READ",
+  "corruption": "blur",
+  "severity": 1.0,
+  "cer": 0.0468502690724913,
+  "wer": 0.1935483870967742
+ },
+ {
+  "dataset": "READ",
+  "corruption": "blur",
+  "severity": 2.0,
+  "cer": 0.35874824763713653,
+  "wer": 0.7324884792626728
+ },
+ {
+  "dataset": "READ",
+  "corruption": "blur",
+  "severity": 3.0,
+  "cer": 0.9100981323203545,
+  "wer": 0.9797235023041475
+ },
+ {
+  "dataset": "READ",
+  "corruption": "rotate",
+  "severity": 2,
+  "cer": 0.04282548726993171,
+  "wer": 0.17857142857142858
+ },
+ {
+  "dataset": "READ",
+  "corruption": "rotate",
+  "severity": 5,
+  "cer": 0.06484873151539818,
+  "wer": 0.25599078341013826
+ },
+ {
+  "dataset": "READ",
+  "corruption": "rotate",
+  "severity": 10,
+  "cer": 0.20444987111653778,
+  "wer": 0.576036866359447
+ },
+ {
+  "dataset": "READ",
+  "corruption": "noise",
+  "severity": 0.05,
+  "cer": 0.06276850721295166,
+  "wer": 0.22419354838709676
+ },
+ {
+  "dataset": "READ",
+  "corruption": "noise",
+  "severity": 0.1,
+  "cer": 0.36928503595170264,
+  "wer": 0.7907834101382488
+ },
+ {
+  "dataset": "READ",
+  "corruption": "noise",
+  "severity": 0.2,
+  "cer": 0.8364310586532808,
+  "wer": 1.2640552995391705
+ },
+ {
+  "dataset": "READ",
+  "corruption": "thicken",
+  "severity": 2,
+  "cer": 0.04065481843259621,
+  "wer": 0.17142857142857143
+ },
+ {
+  "dataset": "READ",
+  "corruption": "thicken",
+  "severity": 3,
+  "cer": 0.048206937095825984,
+  "wer": 0.1988479262672811
+ },
+ {
+  "dataset": "READ",
+  "corruption": "thicken",
+  "severity": 4,
+  "cer": 0.07357662913218468,
+  "wer": 0.2751152073732719
+ },
+ {
+  "dataset": "READ",
+  "corruption": "thin",
+  "severity": 2,
+  "cer": 0.04011215122326234,
+  "wer": 0.17419354838709677
+ },
+ {
+  "dataset": "READ",
+  "corruption": "thin",
+  "severity": 3,
+  "cer": 0.05422149866594311,
+  "wer": 0.22557603686635944
+ },
+ {
+  "dataset": "READ",
+  "corruption": "thin",
+  "severity": 4,
+  "cer": 0.17799484466151133,
+  "wer": 0.5433179723502304
+ },
+ {
+  "dataset": "READ",
+  "corruption": "contrast",
+  "severity": 0.7,
+  "cer": 0.038619816397594174,
+  "wer": 0.1652073732718894
+ },
+ {
+  "dataset": "READ",
+  "corruption": "contrast",
+  "severity": 0.4,
+  "cer": 0.038619816397594174,
+  "wer": 0.1652073732718894
+ },
+ {
+  "dataset": "READ",
+  "corruption": "contrast",
+  "severity": 0.2,
+  "cer": 0.0385293718627052,
+  "wer": 0.16497695852534563
+ },
+ {
+  "dataset": "READ",
+  "corruption": "rotate_canvas",
+  "severity": 2,
+  "cer": 0.04581015692126803,
+  "wer": 0.19055299539170506
+ },
+ {
+  "dataset": "READ",
+  "corruption": "rotate_canvas",
+  "severity": 5,
+  "cer": 0.11821100709989599,
+  "wer": 0.3619815668202765
+ },
+ {
+  "dataset": "READ",
+  "corruption": "rotate_canvas",
+  "severity": 10,
+  "cer": 0.43639488083932526,
+  "wer": 0.7539170506912443
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "clean",
+  "severity": 0,
+  "cer": 0.030632042964020736,
+  "wer": 0.08284855846065332
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "blur",
+  "severity": 1.0,
+  "cer": 0.03699593331884643,
+  "wer": 0.10052419612606278
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "blur",
+  "severity": 2.0,
+  "cer": 0.186236922981405,
+  "wer": 0.3930512050118264
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "blur",
+  "severity": 3.0,
+  "cer": 0.6391596560394872,
+  "wer": 0.8763024995205523
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "rotate",
+  "severity": 2,
+  "cer": 0.046285661068512715,
+  "wer": 0.12238701016429074
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "rotate",
+  "severity": 5,
+  "cer": 0.13619501443516593,
+  "wer": 0.3355814102154318
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "rotate",
+  "severity": 10,
+  "cer": 0.6594620184397604,
+  "wer": 0.8927954995844787
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "noise",
+  "severity": 0.05,
+  "cer": 0.0705926178871884,
+  "wer": 0.17742760340088218
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "noise",
+  "severity": 0.1,
+  "cer": 0.2517617111104213,
+  "wer": 0.4590871316243687
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "noise",
+  "severity": 0.2,
+  "cer": 0.6790038183342129,
+  "wer": 0.9018410790769034
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "thicken",
+  "severity": 2,
+  "cer": 0.03299909974234005,
+  "wer": 0.0898484945342965
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "thicken",
+  "severity": 3,
+  "cer": 0.0474109831434514,
+  "wer": 0.12785271367384773
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "thicken",
+  "severity": 4,
+  "cer": 0.12594294229037967,
+  "wer": 0.2786869526305696
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "thin",
+  "severity": 2,
+  "cer": 0.03278179616924844,
+  "wer": 0.09020008949689957
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "thin",
+  "severity": 3,
+  "cer": 0.06864464657126006,
+  "wer": 0.1848750239723838
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "thin",
+  "severity": 4,
+  "cer": 0.30815974916958994,
+  "wer": 0.5646615099405485
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "contrast",
+  "severity": 0.7,
+  "cer": 0.030632042964020736,
+  "wer": 0.08284855846065332
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "contrast",
+  "severity": 0.4,
+  "cer": 0.03061652128022848,
+  "wer": 0.08281659528223487
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "contrast",
+  "severity": 0.2,
+  "cer": 0.030639803805916865,
+  "wer": 0.0827846321038164
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "rotate_canvas",
+  "severity": 2,
+  "cer": 0.04235867506907149,
+  "wer": 0.11033689190053059
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "rotate_canvas",
+  "severity": 5,
+  "cer": 0.11483717753701922,
+  "wer": 0.2532442626094739
+ },
+ {
+  "dataset": "LAM",
+  "corruption": "rotate_canvas",
+  "severity": 10,
+  "cer": 0.4280647564647813,
+  "wer": 0.623793390014703
+ }
+]

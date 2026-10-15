@@ -70,17 +70,11 @@ Loads a source dataset's trained checkpoint and its own label converter, then ru
 
 **Finding**: cross-dataset CER (37–79%) is 10–20x worse than in-domain (3–5%). Vocabulary mismatch (OOV rate 1–3.5%) explains almost none of this — it's a genuine failure to transfer handwriting-style features across domains. READ2016 is the hardest target for every source (likely its distinct historical German/archival script); LAM is the easiest target but the worst source (its large, stylistically narrow training set generalizes outward worse than IAM's or READ2016's).
 
-### 6.2 Robustness to test-time corruption (`robustness_eval.py`)
+### 6.2 Robustness to test-time corruption (`robustness_eval.py`, corrected v2)
 
-Applies Gaussian blur, rotation, and contrast adjustment to each dataset's own test images at inference time, using the already-trained checkpoints.
+Corruptions applied to each dataset's own test images with the trained checkpoints. The first version of this experiment had three flaws found in the 2026-10-14 audit (truncated blur kernel, rotation clipping the line ends, no training-covered corruption to test H3); it was fixed and re-run. Corrected results and the full audit are in `RESULTS.md` §3.2 and `report/report.pdf` §4.3 and §6.
 
-| Dataset | Clean | Blur σ=1/2/3 | Rotate 2°/5°/10° | Contrast 0.7/0.4/0.2 |
-|---|---|---|---|---|
-| IAM | 5.18% | 7.05% / 19.01% / 23.28% | 6.29% / 14.49% / 45.34% | 5.18% / 5.18% / 5.18% |
-| READ2016 | 3.86% | 4.61% / 9.04% / 11.48% | 4.58% / 11.82% / 43.64% | 3.86% / 3.86% / 3.85% |
-| LAM | 3.06% | 3.67% / 7.69% / 9.77% | 4.24% / 11.48% / 42.81% | 3.06% / 3.06% / 3.06% |
-
-**Finding**: robustness tracks the training augmentation recipe exactly, not the architecture. Contrast invariance is perfect because `ColorJitter` is part of training augmentation. Blur causes up to ~4x CER degradation because the `--blur-*` CLI flags in `option.py` are dead code never wired into the actual pipeline — blur is genuinely unseen. Rotation is catastrophic (>40% CER at 10°) because training's `RandomTransform` only applies a mild perspective warp, not true rigid rotation.
+**Finding**: stroke-width changes at training strength cost ≤0.63 CER points; blur, rotation and noise (never seen in training) cost more even at their mildest level and reach 18–91% CER at moderate levels. Contrast invariance is architectural — the model standardizes each input image — not an effect of `ColorJitter` as previously stated.
 
 ### 6.3 Reduced training data / LAM data efficiency
 

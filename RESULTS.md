@@ -47,22 +47,25 @@ Checkpoints: `output/{read,lam,iam}/best_CER.pth` (and `best_WER.pth`).
 
 ### 3.2 Robustness to test-time corruption
 
-**Question**: how does the model degrade under corruptions never seen during training?
+**Question**: how does the model degrade under corruptions applied only at test time, and do corruptions covered by the training augmentation hurt less (H3)?
 
-**Method** (`robustness_eval.py`): applies blur (Gaussian, σ = 1/2/3), rotation (2°/5°/10°), and contrast adjustment (factor 0.7/0.4/0.2) to each dataset's own in-domain test images at inference time, using the existing trained checkpoints (no retraining).
+**Method** (`robustness_eval.py`, v2 — see the audit note below): corruptions are applied to each dataset's own test images using the trained checkpoints (no retraining). Not covered by training: Gaussian blur (σ = 1/2/3 at model resolution, kernel 2⌈3σ⌉+1), rotation (2°/5°/10°, raw line rotated with an expanded bounding box before resizing), Gaussian noise (σ = 0.05/0.1/0.2). Covered by training: stroke thickening/thinning (the training's own erosion/dilation) with kernel 2 px (training range), 3 and 4 px (beyond). Control: contrast (0.7/0.4/0.2). Full table in `output_robustness_v2.log` / `robustness_results.json`.
 
-| Dataset | Clean | Blur σ=1/2/3 | Rotate 2°/5°/10° | Contrast 0.7/0.4/0.2 |
-|---|---|---|---|---|
-| IAM | 5.18% | 7.05% / 19.01% / 23.28% | 6.29% / 14.49% / 45.34% | 5.18% / 5.18% / 5.18% |
-| READ2016 | 3.86% | 4.61% / 9.04% / 11.48% | 4.58% / 11.82% / 43.64% | 3.86% / 3.86% / 3.85% |
-| LAM | 3.06% | 3.67% / 7.69% / 9.77% | 4.24% / 11.48% / 42.81% | 3.06% / 3.06% / 3.06% |
+| CER (%) | IAM | READ2016 | LAM |
+|---|---|---|---|
+| clean | 5.18 | 3.87 | 3.06 |
+| blur σ = 1 / 2 / 3 | 7.13 / 54.79 / 88.87 | 4.69 / 35.87 / 91.01 | 3.70 / 18.62 / 63.92 |
+| rotate 2° / 5° / 10° | 7.32 / 17.79 / 60.67 | 4.28 / 6.48 / 20.44 | 4.63 / 13.62 / 65.95 |
+| noise 0.05 / 0.1 / 0.2 | 13.43 / 45.70 / 91.10 | 6.28 / 36.93 / 83.64 | 7.06 / 25.18 / 67.90 |
+| thicken 2 / 3 / 4 px | 5.72 / 8.54 / 18.53 | 4.07 / 4.82 / 7.36 | 3.30 / 4.74 / 12.59 |
+| thin 2 / 3 / 4 px | 5.81 / 17.22 / 60.07 | 4.01 / 5.42 / 17.80 | 3.28 / 6.86 / 30.82 |
+| contrast 0.7 / 0.4 / 0.2 | 5.18 / 5.18 / 5.18 | 3.86 / 3.86 / 3.85 | 3.06 / 3.06 / 3.06 |
 
-(CER shown; see script output for WER.)
+**Finding**: H3 holds. Covered corruptions at training strength (2 px) cost only +0.14 to +0.63 CER points; every uncovered corruption costs more even at its mildest level (+0.4 to +8.3), and moderate levels are destructive (blur σ = 2: 18.6–54.8%; noise σ = 0.1: 25.2–45.7%; rotation 10°: 20.4–66.0%). Coverage only protects the trained range: thinning by 4 px reaches 60.1% CER on IAM. READ2016 is much more robust to rotation because its lines are short (median 21 characters), so the tilted bounding box barely grows and glyphs shrink less at the fixed 64-px input height.
 
-**Finding**: robustness tracks the training augmentation recipe exactly, not the architecture.
-- **Contrast**: perfectly invariant, because `ColorJitter` (brightness/contrast/saturation/hue) is applied during training (`data/dataset.py`'s `SameTrCollate`).
-- **Blur**: causes up to ~4x CER degradation. The `--blur-*` CLI flags in `utils/option.py` are dead code — never wired into the actual augmentation pipeline (`data/transform.py` has no blur class at all) — so blur is genuinely unseen.
-- **Rotation**: catastrophic (>40% CER at just 10°). Training's `RandomTransform` only applies a mild ±8px corner-perspective warp, not true rigid rotation — a qualitatively different and far harsher transform, especially on these wide 512×64 line images where rotation causes large vertical displacement at the line's ends.
+**Contrast is not learned robustness.** The model applies a parameter-free layer norm to every input image (`model/HTR_VT.py`, first line of `forward`), i.e. per-image standardization. torchvision's contrast reduction is an affine change of each image, which this removes exactly — hence identical CER at every level. (The earlier version of this document credited `ColorJitter`; that was wrong.)
+
+**Audit note — v1 of this experiment had three problems, now fixed**: (1) a fixed 5-px blur kernel truncated σ = 2 and 3 into nearly the same box filter, understating blur damage (IAM σ = 2: 19.0% in v1 vs 54.8% now); (2) rotation was applied to the padded 512×64 canvas, cutting off the line ends (31% of ink lost at 10° on sampled IAM lines) — kept as `rotate_canvas` for comparison (42.8–45.3% at 10° for all datasets); (3) no corruption in v1 was actually covered by training, so H3 could not be tested — stroke thickening/thinning and noise were added.
 
 ### 3.3 Reduced training data (LAM data efficiency)
 
@@ -88,3 +91,4 @@ All scripts referenced above live in the repo root / `data/`:
 - `run_queue.sh` — chains READ2016 → LAM → IAM train+test end to end
 - `run_reduced_data_queue.sh` — chains the three LAM data-fraction runs
 - `cross_eval.py`, `robustness_eval.py` — the two extended analyses above, reusable against any checkpoint in `output/`
+- `report/make_figures.py` + `report/report.typ` — the full Typst report (figures, side-by-side test examples, error analysis, bootstrap intervals, audit)

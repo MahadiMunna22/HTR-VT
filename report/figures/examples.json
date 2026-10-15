@@ -1,0 +1,2130 @@
+{
+ "qualitative": {
+  "IAM": [
+   {
+    "gt": "its ventricles decrease in volume and it expels its",
+    "pred": "its ventricles decrease in volume and it expels its",
+    "gt_runs": [
+     [
+      "its ventricles decrease in volume and it expels its",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "its ventricles decrease in volume and it expels its",
+      false
+     ]
+    ],
+    "cer": 0.0,
+    "label": "Exact match",
+    "img": "figures/qual_IAM_0.png",
+    "file": "test_1309.png"
+   },
+   {
+    "gt": "His behaviour was not only boorish and in the worst of",
+    "pred": "His behaviour was not only boorish and the worst of",
+    "gt_runs": [
+     [
+      "His behaviour was not only boorish and",
+      false
+     ],
+     [
+      " in",
+      true
+     ],
+     [
+      " the worst of",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "His behaviour was not only boorish and the worst of",
+      false
+     ]
+    ],
+    "cer": 5.555555555555555,
+    "label": "Typical error",
+    "img": "figures/qual_IAM_1.png",
+    "file": "test_2642.png"
+   },
+   {
+    "gt": "inconceivable idea , that Ariadne's arrival",
+    "pred": "inconveniancable idea , hat Ariadue's arrival",
+    "gt_runs": [
+     [
+      "incon",
+      false
+     ],
+     [
+      "c",
+      true
+     ],
+     [
+      "ei",
+      false
+     ],
+     [
+      "v",
+      true
+     ],
+     [
+      "able idea , ",
+      false
+     ],
+     [
+      "t",
+      true
+     ],
+     [
+      "hat Ariad",
+      false
+     ],
+     [
+      "n",
+      true
+     ],
+     [
+      "e's arrival",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "incon",
+      false
+     ],
+     [
+      "v",
+      true
+     ],
+     [
+      "e",
+      false
+     ],
+     [
+      "n",
+      true
+     ],
+     [
+      "i",
+      false
+     ],
+     [
+      "anc",
+      true
+     ],
+     [
+      "able idea , hat Ariad",
+      false
+     ],
+     [
+      "u",
+      true
+     ],
+     [
+      "e's arrival",
+      false
+     ]
+    ],
+    "cer": 16.27906976744186,
+    "label": "Hard case (90th percentile)",
+    "img": "figures/qual_IAM_2.png",
+    "file": "test_1719.png"
+   },
+   {
+    "gt": "-----------------------------------------------------",
+    "pred": "renleno Lalubas e",
+    "gt_runs": [
+     [
+      "-----------------------------------------------------",
+      true
+     ]
+    ],
+    "pred_runs": [
+     [
+      "renleno Lalubas e",
+      true
+     ]
+    ],
+    "cer": 100.0,
+    "label": "Worst line in test set",
+    "img": "figures/qual_IAM_3.png",
+    "file": "test_2658.png"
+   }
+  ],
+  "READ": [
+   {
+    "gt": "Sȳ Ire dieselben wider",
+    "pred": "Sȳ Ire dieselben wider",
+    "gt_runs": [
+     [
+      "Sȳ Ire dieselben wider",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "Sȳ Ire dieselben wider",
+      false
+     ]
+    ],
+    "cer": 0.0,
+    "label": "Exact match",
+    "img": "figures/qual_READ_0.png",
+    "file": "test_592.jpeg"
+   },
+   {
+    "gt": "Gleichsfahls ist ain Memorial",
+    "pred": "Gleichsfahls ist ain Menarial",
+    "gt_runs": [
+     [
+      "Gleichsfahls ist ain Me",
+      false
+     ],
+     [
+      "mo",
+      true
+     ],
+     [
+      "rial",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "Gleichsfahls ist ain Me",
+      false
+     ],
+     [
+      "na",
+      true
+     ],
+     [
+      "rial",
+      false
+     ]
+    ],
+    "cer": 6.896551724137931,
+    "label": "Typical error",
+    "img": "figures/qual_READ_1.png",
+    "file": "test_553.jpeg"
+   },
+   {
+    "gt": "ComPromiss",
+    "pred": "ComProniss.",
+    "gt_runs": [
+     [
+      "ComPro",
+      false
+     ],
+     [
+      "m",
+      true
+     ],
+     [
+      "iss",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "ComPro",
+      false
+     ],
+     [
+      "n",
+      true
+     ],
+     [
+      "iss",
+      false
+     ],
+     [
+      ".",
+      true
+     ]
+    ],
+    "cer": 20.0,
+    "label": "Hard case (90th percentile)",
+    "img": "figures/qual_READ_2.png",
+    "file": "test_243.jpeg"
+   },
+   {
+    "gt": "226",
+    "pred": "336",
+    "gt_runs": [
+     [
+      "22",
+      true
+     ],
+     [
+      "6",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "33",
+      true
+     ],
+     [
+      "6",
+      false
+     ]
+    ],
+    "cer": 66.66666666666667,
+    "label": "Worst line in test set",
+    "img": "figures/qual_READ_3.png",
+    "file": "test_1050.jpeg"
+   }
+  ],
+  "LAM": [
+   {
+    "gt": "del Pò egli si ridurrà a terminar la sua",
+    "pred": "del Pò egli si ridurrà a terminar la sua",
+    "gt_runs": [
+     [
+      "del Pò egli si ridurrà a terminar la sua",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "del Pò egli si ridurrà a terminar la sua",
+      false
+     ]
+    ],
+    "cer": 0.0,
+    "label": "Exact match",
+    "img": "figures/qual_LAM_0.png",
+    "file": "039_1684_09.jpg"
+   },
+   {
+    "gt": "troppo grasso di porco. È necessario ancora",
+    "pred": "troppo grassa di porco. È' necessario ancora",
+    "gt_runs": [
+     [
+      "troppo grass",
+      false
+     ],
+     [
+      "o",
+      true
+     ],
+     [
+      " di porco. È necessario ancora",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "troppo grass",
+      false
+     ],
+     [
+      "a",
+      true
+     ],
+     [
+      " di porco. È",
+      false
+     ],
+     [
+      "'",
+      true
+     ],
+     [
+      " necessario ancora",
+      false
+     ]
+    ],
+    "cer": 4.651162790697675,
+    "label": "Typical error",
+    "img": "figures/qual_LAM_1.png",
+    "file": "002_07_00.jpg"
+   },
+   {
+    "gt": "re in essa. La prego de' miei rispetti al sud.o",
+    "pred": "r a glissamia prego de' miei rispetti al sud.o",
+    "gt_runs": [
+     [
+      "r",
+      false
+     ],
+     [
+      "e in e",
+      true
+     ],
+     [
+      "ssa",
+      false
+     ],
+     [
+      ". L",
+      true
+     ],
+     [
+      "a prego de' miei rispetti al sud.o",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "r",
+      false
+     ],
+     [
+      " a gli",
+      true
+     ],
+     [
+      "ssa",
+      false
+     ],
+     [
+      "mi",
+      true
+     ],
+     [
+      "a prego de' miei rispetti al sud.o",
+      false
+     ]
+    ],
+    "cer": 19.148936170212767,
+    "label": "Hard case (90th percentile)",
+    "img": "figures/qual_LAM_2.png",
+    "file": "034_1320_27.jpg"
+   },
+   {
+    "gt": "mi #",
+    "pred": "mi ralegao",
+    "gt_runs": [
+     [
+      "mi ",
+      false
+     ],
+     [
+      "#",
+      true
+     ]
+    ],
+    "pred_runs": [
+     [
+      "mi ",
+      false
+     ],
+     [
+      "ralegao",
+      true
+     ]
+    ],
+    "cer": 175.0,
+    "label": "Worst line in test set",
+    "img": "figures/qual_LAM_3.png",
+    "file": "021_895_30.jpg"
+   }
+  ]
+ },
+ "cross": {
+  "IAM": {
+   "img": "figures/cross_IAM.png",
+   "gt": "its ventricles decrease in volume and it expels its",
+   "rows": [
+    {
+     "gt": "its ventricles decrease in volume and it expels its",
+     "pred": "its ventricles decrease in volume and it expels its",
+     "gt_runs": [
+      [
+       "its ventricles decrease in volume and it expels its",
+       false
+      ]
+     ],
+     "pred_runs": [
+      [
+       "its ventricles decrease in volume and it expels its",
+       false
+      ]
+     ],
+     "cer": 0.0,
+     "source": "IAM"
+    },
+    {
+     "gt": "its ventricles decrease in volume and it expels its",
+     "pred": "Bved Feee vmer vdfohd tz",
+     "gt_runs": [
+      [
+       "its ",
+       true
+      ],
+      [
+       "v",
+       false
+      ],
+      [
+       "entricl",
+       true
+      ],
+      [
+       "e",
+       false
+      ],
+      [
+       "s",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "d",
+       true
+      ],
+      [
+       "e",
+       false
+      ],
+      [
+       "cr",
+       true
+      ],
+      [
+       "e",
+       false
+      ],
+      [
+       "as",
+       true
+      ],
+      [
+       "e",
+       false
+      ],
+      [
+       " in",
+       true
+      ],
+      [
+       " v",
+       false
+      ],
+      [
+       "olu",
+       true
+      ],
+      [
+       "me",
+       false
+      ],
+      [
+       " and it",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "expels",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "i",
+       true
+      ],
+      [
+       "t",
+       false
+      ],
+      [
+       "s",
+       true
+      ]
+     ],
+     "pred_runs": [
+      [
+       "B",
+       true
+      ],
+      [
+       "ve",
+       false
+      ],
+      [
+       "d",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "F",
+       true
+      ],
+      [
+       "eee vme",
+       false
+      ],
+      [
+       "r",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "vdfohd",
+       true
+      ],
+      [
+       " t",
+       false
+      ],
+      [
+       "z",
+       true
+      ]
+     ],
+     "cer": 74.50980392156863,
+     "source": "READ"
+    },
+    {
+     "gt": "its ventricles decrease in volume and it expels its",
+     "pred": "e rericheo cecceate in vollme ara il engele i=",
+     "gt_runs": [
+      [
+       "its",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "v",
+       true
+      ],
+      [
+       "e",
+       false
+      ],
+      [
+       "nt",
+       true
+      ],
+      [
+       "ric",
+       false
+      ],
+      [
+       "l",
+       true
+      ],
+      [
+       "e",
+       false
+      ],
+      [
+       "s",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "d",
+       true
+      ],
+      [
+       "ec",
+       false
+      ],
+      [
+       "r",
+       true
+      ],
+      [
+       "ea",
+       false
+      ],
+      [
+       "s",
+       true
+      ],
+      [
+       "e in vol",
+       false
+      ],
+      [
+       "u",
+       true
+      ],
+      [
+       "me a",
+       false
+      ],
+      [
+       "nd",
+       true
+      ],
+      [
+       " i",
+       false
+      ],
+      [
+       "t",
+       true
+      ],
+      [
+       " e",
+       false
+      ],
+      [
+       "xp",
+       true
+      ],
+      [
+       "el",
+       false
+      ],
+      [
+       "s",
+       true
+      ],
+      [
+       " i",
+       false
+      ],
+      [
+       "ts",
+       true
+      ]
+     ],
+     "pred_runs": [
+      [
+       "e",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "r",
+       true
+      ],
+      [
+       "eric",
+       false
+      ],
+      [
+       "h",
+       true
+      ],
+      [
+       "e",
+       false
+      ],
+      [
+       "o",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "c",
+       true
+      ],
+      [
+       "ec",
+       false
+      ],
+      [
+       "c",
+       true
+      ],
+      [
+       "ea",
+       false
+      ],
+      [
+       "t",
+       true
+      ],
+      [
+       "e in vol",
+       false
+      ],
+      [
+       "l",
+       true
+      ],
+      [
+       "me a",
+       false
+      ],
+      [
+       "ra",
+       true
+      ],
+      [
+       " i",
+       false
+      ],
+      [
+       "l",
+       true
+      ],
+      [
+       " e",
+       false
+      ],
+      [
+       "ng",
+       true
+      ],
+      [
+       "el",
+       false
+      ],
+      [
+       "e",
+       true
+      ],
+      [
+       " i",
+       false
+      ],
+      [
+       "=",
+       true
+      ]
+     ],
+     "cer": 39.21568627450981,
+     "source": "LAM"
+    }
+   ]
+  },
+  "READ": {
+   "img": "figures/cross_READ.png",
+   "gt": "Sȳ Ire dieselben wider",
+   "rows": [
+    {
+     "gt": "Sȳ Ire dieselben wider",
+     "pred": "Oyamaifueb mer",
+     "gt_runs": [
+      [
+       "Sȳ Ire d",
+       true
+      ],
+      [
+       "i",
+       false
+      ],
+      [
+       "es",
+       true
+      ],
+      [
+       "e",
+       false
+      ],
+      [
+       "l",
+       true
+      ],
+      [
+       "b",
+       false
+      ],
+      [
+       "en",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "wid",
+       true
+      ],
+      [
+       "er",
+       false
+      ]
+     ],
+     "pred_runs": [
+      [
+       "Oyama",
+       true
+      ],
+      [
+       "i",
+       false
+      ],
+      [
+       "fu",
+       true
+      ],
+      [
+       "eb ",
+       false
+      ],
+      [
+       "m",
+       true
+      ],
+      [
+       "er",
+       false
+      ]
+     ],
+     "cer": 72.72727272727273,
+     "source": "IAM"
+    },
+    {
+     "gt": "Sȳ Ire dieselben wider",
+     "pred": "Sȳ Ire dieselben wider",
+     "gt_runs": [
+      [
+       "Sȳ Ire dieselben wider",
+       false
+      ]
+     ],
+     "pred_runs": [
+      [
+       "Sȳ Ire dieselben wider",
+       false
+      ]
+     ],
+     "cer": 0.0,
+     "source": "READ"
+    },
+    {
+     "gt": "Sȳ Ire dieselben wider",
+     "pred": "#a#epeb mo",
+     "gt_runs": [
+      [
+       "Sȳ Ire di",
+       true
+      ],
+      [
+       "e",
+       false
+      ],
+      [
+       "s",
+       true
+      ],
+      [
+       "e",
+       false
+      ],
+      [
+       "l",
+       true
+      ],
+      [
+       "b",
+       false
+      ],
+      [
+       "en",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "wider",
+       true
+      ]
+     ],
+     "pred_runs": [
+      [
+       "#a#",
+       true
+      ],
+      [
+       "e",
+       false
+      ],
+      [
+       "p",
+       true
+      ],
+      [
+       "eb ",
+       false
+      ],
+      [
+       "mo",
+       true
+      ]
+     ],
+     "cer": 81.81818181818181,
+     "source": "LAM"
+    }
+   ]
+  },
+  "LAM": {
+   "img": "figures/cross_LAM.png",
+   "gt": "del Pò egli si ridurrà a terminar la sua",
+   "rows": [
+    {
+     "gt": "del Pò egli si ridurrà a terminar la sua",
+     "pred": "bel Do egole sit vituma a Ferminar Ia sua",
+     "gt_runs": [
+      [
+       "d",
+       true
+      ],
+      [
+       "el ",
+       false
+      ],
+      [
+       "Pò",
+       true
+      ],
+      [
+       " egl",
+       false
+      ],
+      [
+       "i",
+       true
+      ],
+      [
+       " si ",
+       false
+      ],
+      [
+       "r",
+       true
+      ],
+      [
+       "i",
+       false
+      ],
+      [
+       "d",
+       true
+      ],
+      [
+       "u",
+       false
+      ],
+      [
+       "rrà",
+       true
+      ],
+      [
+       " a ",
+       false
+      ],
+      [
+       "t",
+       true
+      ],
+      [
+       "erminar ",
+       false
+      ],
+      [
+       "l",
+       true
+      ],
+      [
+       "a sua",
+       false
+      ]
+     ],
+     "pred_runs": [
+      [
+       "b",
+       true
+      ],
+      [
+       "el ",
+       false
+      ],
+      [
+       "Do",
+       true
+      ],
+      [
+       " eg",
+       false
+      ],
+      [
+       "o",
+       true
+      ],
+      [
+       "l",
+       false
+      ],
+      [
+       "e",
+       true
+      ],
+      [
+       " si",
+       false
+      ],
+      [
+       "t",
+       true
+      ],
+      [
+       " ",
+       false
+      ],
+      [
+       "v",
+       true
+      ],
+      [
+       "i",
+       false
+      ],
+      [
+       "t",
+       true
+      ],
+      [
+       "u",
+       false
+      ],
+      [
+       "ma",
+       true
+      ],
+      [
+       " a ",
+       false
+      ],
+      [
+       "F",
+       true
+      ],
+      [
+       "erminar ",
+       false
+      ],
+      [
+       "I",
+       true
+      ],
+      [
+       "a sua",
+       false
+      ]
+     ],
+     "cer": 32.5,
+     "source": "IAM"
+    },
+    {
+     "gt": "del Pò egli si ridurrà a terminar la sua",
+     "pred": "l bs egi iipMare a 1erner Aata",
+     "gt_runs": [
+      [
+       "de",
+       true
+      ],
+      [
+       "l ",
+       false
+      ],
+      [
+       "Pò",
+       true
+      ],
+      [
+       " eg",
+       false
+      ],
+      [
+       "l",
+       true
+      ],
+      [
+       "i ",
+       false
+      ],
+      [
+       "s",
+       true
+      ],
+      [
+       "i",
+       false
+      ],
+      [
+       " r",
+       true
+      ],
+      [
+       "i",
+       false
+      ],
+      [
+       "dur",
+       true
+      ],
+      [
+       "r",
+       false
+      ],
+      [
+       "à",
+       true
+      ],
+      [
+       " a ",
+       false
+      ],
+      [
+       "t",
+       true
+      ],
+      [
+       "er",
+       false
+      ],
+      [
+       "mi",
+       true
+      ],
+      [
+       "n",
+       false
+      ],
+      [
+       "a",
+       true
+      ],
+      [
+       "r ",
+       false
+      ],
+      [
+       "l",
+       true
+      ],
+      [
+       "a",
+       false
+      ],
+      [
+       " su",
+       true
+      ],
+      [
+       "a",
+       false
+      ]
+     ],
+     "pred_runs": [
+      [
+       "l ",
+       false
+      ],
+      [
+       "bs",
+       true
+      ],
+      [
+       " egi ii",
+       false
+      ],
+      [
+       "pMa",
+       true
+      ],
+      [
+       "r",
+       false
+      ],
+      [
+       "e",
+       true
+      ],
+      [
+       " a ",
+       false
+      ],
+      [
+       "1",
+       true
+      ],
+      [
+       "ern",
+       false
+      ],
+      [
+       "e",
+       true
+      ],
+      [
+       "r ",
+       false
+      ],
+      [
+       "A",
+       true
+      ],
+      [
+       "a",
+       false
+      ],
+      [
+       "t",
+       true
+      ],
+      [
+       "a",
+       false
+      ]
+     ],
+     "cer": 50.0,
+     "source": "READ"
+    },
+    {
+     "gt": "del Pò egli si ridurrà a terminar la sua",
+     "pred": "del Pò egli si ridurrà a terminar la sua",
+     "gt_runs": [
+      [
+       "del Pò egli si ridurrà a terminar la sua",
+       false
+      ]
+     ],
+     "pred_runs": [
+      [
+       "del Pò egli si ridurrà a terminar la sua",
+       false
+      ]
+     ],
+     "cer": 0.0,
+     "source": "LAM"
+    }
+   ]
+  }
+ },
+ "corruption": [
+  {
+   "gt": "therefore in essence a forced payment whose",
+   "pred": "therefore in essence a forced payment whose",
+   "gt_runs": [
+    [
+     "therefore in essence a forced payment whose",
+     false
+    ]
+   ],
+   "pred_runs": [
+    [
+     "therefore in essence a forced payment whose",
+     false
+    ]
+   ],
+   "cer": 0.0,
+   "corruption": "clean",
+   "severity": 0,
+   "img": "figures/corr_clean_0.png"
+  },
+  {
+   "gt": "therefore in essence a forced payment whose",
+   "pred": "thetere coce a trad popt whe",
+   "gt_runs": [
+    [
+     "the",
+     false
+    ],
+    [
+     "r",
+     true
+    ],
+    [
+     "e",
+     false
+    ],
+    [
+     "fo",
+     true
+    ],
+    [
+     "re",
+     false
+    ],
+    [
+     " in",
+     true
+    ],
+    [
+     " ",
+     false
+    ],
+    [
+     "essen",
+     true
+    ],
+    [
+     "ce a ",
+     false
+    ],
+    [
+     "fo",
+     true
+    ],
+    [
+     "r",
+     false
+    ],
+    [
+     "ce",
+     true
+    ],
+    [
+     "d p",
+     false
+    ],
+    [
+     "aymen",
+     true
+    ],
+    [
+     "t wh",
+     false
+    ],
+    [
+     "os",
+     true
+    ],
+    [
+     "e",
+     false
+    ]
+   ],
+   "pred_runs": [
+    [
+     "the",
+     false
+    ],
+    [
+     "t",
+     true
+    ],
+    [
+     "ere ",
+     false
+    ],
+    [
+     "co",
+     true
+    ],
+    [
+     "ce a ",
+     false
+    ],
+    [
+     "t",
+     true
+    ],
+    [
+     "r",
+     false
+    ],
+    [
+     "a",
+     true
+    ],
+    [
+     "d p",
+     false
+    ],
+    [
+     "op",
+     true
+    ],
+    [
+     "t whe",
+     false
+    ]
+   ],
+   "cer": 51.16279069767442,
+   "corruption": "blur",
+   "severity": 2.0,
+   "img": "figures/corr_blur_2_0.png"
+  },
+  {
+   "gt": "therefore in essence a forced payment whose",
+   "pred": "o o ",
+   "gt_runs": [
+    [
+     "theref",
+     true
+    ],
+    [
+     "o",
+     false
+    ],
+    [
+     "re in essence a",
+     true
+    ],
+    [
+     " ",
+     false
+    ],
+    [
+     "f",
+     true
+    ],
+    [
+     "o",
+     false
+    ],
+    [
+     "rced payment",
+     true
+    ],
+    [
+     " ",
+     false
+    ],
+    [
+     "whose",
+     true
+    ]
+   ],
+   "pred_runs": [
+    [
+     "o o ",
+     false
+    ]
+   ],
+   "cer": 90.69767441860465,
+   "corruption": "blur",
+   "severity": 3.0,
+   "img": "figures/corr_blur_3_0.png"
+  },
+  {
+   "gt": "therefore in essence a forced payment whose",
+   "pred": "therefore in essence a forced payment whose",
+   "gt_runs": [
+    [
+     "therefore in essence a forced payment whose",
+     false
+    ]
+   ],
+   "pred_runs": [
+    [
+     "therefore in essence a forced payment whose",
+     false
+    ]
+   ],
+   "cer": 0.0,
+   "corruption": "noise",
+   "severity": 0.1,
+   "img": "figures/corr_noise_0_1.png"
+  },
+  {
+   "gt": "therefore in essence a forced payment whose",
+   "pred": "the h een he hoed pgngt e",
+   "gt_runs": [
+    [
+     "th",
+     false
+    ],
+    [
+     "erefor",
+     true
+    ],
+    [
+     "e ",
+     false
+    ],
+    [
+     "in",
+     true
+    ],
+    [
+     " e",
+     false
+    ],
+    [
+     "ss",
+     true
+    ],
+    [
+     "en",
+     false
+    ],
+    [
+     "ce a",
+     true
+    ],
+    [
+     " ",
+     false
+    ],
+    [
+     "f",
+     true
+    ],
+    [
+     "o",
+     false
+    ],
+    [
+     "rc",
+     true
+    ],
+    [
+     "ed p",
+     false
+    ],
+    [
+     "aymen",
+     true
+    ],
+    [
+     "t ",
+     false
+    ],
+    [
+     "whos",
+     true
+    ],
+    [
+     "e",
+     false
+    ]
+   ],
+   "pred_runs": [
+    [
+     "the ",
+     false
+    ],
+    [
+     "h",
+     true
+    ],
+    [
+     " een",
+     false
+    ],
+    [
+     " he",
+     true
+    ],
+    [
+     " ",
+     false
+    ],
+    [
+     "h",
+     true
+    ],
+    [
+     "oed p",
+     false
+    ],
+    [
+     "gng",
+     true
+    ],
+    [
+     "t e",
+     false
+    ]
+   ],
+   "cer": 60.46511627906977,
+   "corruption": "noise",
+   "severity": 0.2,
+   "img": "figures/corr_noise_0_2.png"
+  },
+  {
+   "gt": "therefore in essence a forced payment whose",
+   "pred": "therotfore in essence a toroed payment whose",
+   "gt_runs": [
+    [
+     "ther",
+     false
+    ],
+    [
+     "e",
+     true
+    ],
+    [
+     "fore in essence a ",
+     false
+    ],
+    [
+     "f",
+     true
+    ],
+    [
+     "or",
+     false
+    ],
+    [
+     "c",
+     true
+    ],
+    [
+     "ed payment whose",
+     false
+    ]
+   ],
+   "pred_runs": [
+    [
+     "ther",
+     false
+    ],
+    [
+     "ot",
+     true
+    ],
+    [
+     "fore in essence a ",
+     false
+    ],
+    [
+     "t",
+     true
+    ],
+    [
+     "or",
+     false
+    ],
+    [
+     "o",
+     true
+    ],
+    [
+     "ed payment whose",
+     false
+    ]
+   ],
+   "cer": 9.30232558139535,
+   "corruption": "rotate",
+   "severity": 5,
+   "img": "figures/corr_rotate_5.png"
+  },
+  {
+   "gt": "therefore in essence a forced payment whose",
+   "pred": "meappre i asence a toroewd parment whe \"",
+   "gt_runs": [
+    [
+     "th",
+     true
+    ],
+    [
+     "e",
+     false
+    ],
+    [
+     "refo",
+     true
+    ],
+    [
+     "re i",
+     false
+    ],
+    [
+     "n",
+     true
+    ],
+    [
+     " ",
+     false
+    ],
+    [
+     "es",
+     true
+    ],
+    [
+     "sence a ",
+     false
+    ],
+    [
+     "f",
+     true
+    ],
+    [
+     "or",
+     false
+    ],
+    [
+     "c",
+     true
+    ],
+    [
+     "ed pa",
+     false
+    ],
+    [
+     "y",
+     true
+    ],
+    [
+     "ment wh",
+     false
+    ],
+    [
+     "ose",
+     true
+    ]
+   ],
+   "pred_runs": [
+    [
+     "m",
+     true
+    ],
+    [
+     "e",
+     false
+    ],
+    [
+     "app",
+     true
+    ],
+    [
+     "re i ",
+     false
+    ],
+    [
+     "a",
+     true
+    ],
+    [
+     "sence a ",
+     false
+    ],
+    [
+     "t",
+     true
+    ],
+    [
+     "or",
+     false
+    ],
+    [
+     "o",
+     true
+    ],
+    [
+     "e",
+     false
+    ],
+    [
+     "w",
+     true
+    ],
+    [
+     "d pa",
+     false
+    ],
+    [
+     "r",
+     true
+    ],
+    [
+     "ment wh",
+     false
+    ],
+    [
+     "e \"",
+     true
+    ]
+   ],
+   "cer": 37.2093023255814,
+   "corruption": "rotate",
+   "severity": 10,
+   "img": "figures/corr_rotate_10.png"
+  },
+  {
+   "gt": "therefore in essence a forced payment whose",
+   "pred": "i\"nousare in essence a forced Payme \"",
+   "gt_runs": [
+    [
+     "therefo",
+     true
+    ],
+    [
+     "re in essence a forced ",
+     false
+    ],
+    [
+     "p",
+     true
+    ],
+    [
+     "ayme",
+     false
+    ],
+    [
+     "nt",
+     true
+    ],
+    [
+     " ",
+     false
+    ],
+    [
+     "whose",
+     true
+    ]
+   ],
+   "pred_runs": [
+    [
+     "i\"nousa",
+     true
+    ],
+    [
+     "re in essence a forced ",
+     false
+    ],
+    [
+     "P",
+     true
+    ],
+    [
+     "ayme ",
+     false
+    ],
+    [
+     "\"",
+     true
+    ]
+   ],
+   "cer": 34.883720930232556,
+   "corruption": "rotate_canvas",
+   "severity": 10,
+   "img": "figures/corr_rotate_canvas_10.png"
+  },
+  {
+   "gt": "therefore in essence a forced payment whose",
+   "pred": "therefore in essence a forced payment whose",
+   "gt_runs": [
+    [
+     "therefore in essence a forced payment whose",
+     false
+    ]
+   ],
+   "pred_runs": [
+    [
+     "therefore in essence a forced payment whose",
+     false
+    ]
+   ],
+   "cer": 0.0,
+   "corruption": "thicken",
+   "severity": 3,
+   "img": "figures/corr_thicken_3.png"
+  },
+  {
+   "gt": "therefore in essence a forced payment whose",
+   "pred": "therefore in essence a torced poyment whose",
+   "gt_runs": [
+    [
+     "therefore in essence a ",
+     false
+    ],
+    [
+     "f",
+     true
+    ],
+    [
+     "orced p",
+     false
+    ],
+    [
+     "a",
+     true
+    ],
+    [
+     "yment whose",
+     false
+    ]
+   ],
+   "pred_runs": [
+    [
+     "therefore in essence a ",
+     false
+    ],
+    [
+     "t",
+     true
+    ],
+    [
+     "orced p",
+     false
+    ],
+    [
+     "o",
+     true
+    ],
+    [
+     "yment whose",
+     false
+    ]
+   ],
+   "cer": 4.651162790697675,
+   "corruption": "thin",
+   "severity": 3,
+   "img": "figures/corr_thin_3.png"
+  },
+  {
+   "gt": "therefore in essence a forced payment whose",
+   "pred": "therefore in essence a forced payment whose",
+   "gt_runs": [
+    [
+     "therefore in essence a forced payment whose",
+     false
+    ]
+   ],
+   "pred_runs": [
+    [
+     "therefore in essence a forced payment whose",
+     false
+    ]
+   ],
+   "cer": 0.0,
+   "corruption": "contrast",
+   "severity": 0.2,
+   "img": "figures/corr_contrast_0_2.png"
+  }
+ ],
+ "reduced": {
+  "img": "figures/reduced_LAM.png",
+  "gt": "Bern.i meco si gode e sanità, e buon tem-",
+  "rows": [
+   {
+    "pct": 25,
+    "gt": "Bern.i meco si gode e sanità, e buon tem-",
+    "pred": "Bern.i meco si gode e sanita, e buon tem-",
+    "gt_runs": [
+     [
+      "Bern.i meco si gode e sanit",
+      false
+     ],
+     [
+      "à",
+      true
+     ],
+     [
+      ", e buon tem-",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "Bern.i meco si gode e sanit",
+      false
+     ],
+     [
+      "a",
+      true
+     ],
+     [
+      ", e buon tem-",
+      false
+     ]
+    ],
+    "cer": 2.4390243902439024
+   },
+   {
+    "pct": 50,
+    "gt": "Bern.i meco si gode e sanità, e buon tem-",
+    "pred": "Bern.i meco si gode e sanita, e buon tem-",
+    "gt_runs": [
+     [
+      "Bern.i meco si gode e sanit",
+      false
+     ],
+     [
+      "à",
+      true
+     ],
+     [
+      ", e buon tem-",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "Bern.i meco si gode e sanit",
+      false
+     ],
+     [
+      "a",
+      true
+     ],
+     [
+      ", e buon tem-",
+      false
+     ]
+    ],
+    "cer": 2.4390243902439024
+   },
+   {
+    "pct": 75,
+    "gt": "Bern.i meco si gode e sanità, e buon tem-",
+    "pred": "Bern.i meco si gode e sanità, e buon tem-",
+    "gt_runs": [
+     [
+      "Bern.i meco si gode e sanità, e buon tem-",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "Bern.i meco si gode e sanità, e buon tem-",
+      false
+     ]
+    ],
+    "cer": 0.0
+   },
+   {
+    "pct": 100,
+    "gt": "Bern.i meco si gode e sanità, e buon tem-",
+    "pred": "Bern.i meco si gode e sanità, e buon tem-",
+    "gt_runs": [
+     [
+      "Bern.i meco si gode e sanità, e buon tem-",
+      false
+     ]
+    ],
+    "pred_runs": [
+     [
+      "Bern.i meco si gode e sanità, e buon tem-",
+      false
+     ]
+    ],
+    "cer": 0.0
+   }
+  ],
+  "exact_lines": {
+   "25": 51.43343741129719,
+   "50": 55.35055350553506,
+   "75": 57.649730343457286,
+   "100": 58.04711893272779
+  }
+ }
+}
