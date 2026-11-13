@@ -1,6 +1,6 @@
 # HTR-VT Reproduction — Project Report
 
-Author: Mahadi Hassan Munna · Date: 2026-10-04
+Author: Mahadi Hassan Munna · Date: 2026-10-04 (robustness section updated 2026-10-14)
 
 This report summarizes all work completed in this project session: reproducing the paper ["HTR-VT: Handwritten Text Recognition with Vision Transformer"](https://arxiv.org/pdf/2409.08573) (Li et al., Pattern Recognition 2025) on local hardware, three original extended experiments beyond the paper, and a presentation deck built from the results. The headline technical results (tables, methods) also live in `RESULTS.md`; this report additionally covers environment setup, troubleshooting, engineering decisions, and remaining open items that `RESULTS.md` doesn't track.
 
@@ -41,7 +41,7 @@ All three datasets used in the paper were sourced and converted to the flat `lin
 
 ## 5. Main reproduction results
 
-Each dataset was trained for the paper's full 100,000 iterations via `run/{read,lam,iam}.sh` (adapted for `--train-bs 32 --num-workers 8`):
+Each dataset was trained for the paper's full 100,000 iterations via `run/{read,lam,iam}.sh` (adapted for `--train-bs 32`; `--num-workers 8` for LAM and IAM only, READ2016 ran with 0):
 
 | Dataset | Paper (bs=128) | Ours (bs=32) | CER Δ |
 |---|---|---|---|
@@ -68,7 +68,7 @@ Loads a source dataset's trained checkpoint and its own label converter, then ru
 | READ → LAM | 59.41% | 88.30% | 1.98% |
 | READ → IAM | 69.35% | 94.41% | 0.97% |
 
-**Finding**: cross-dataset CER (37–79%) is 10–20x worse than in-domain (3–5%). Vocabulary mismatch (OOV rate 1–3.5%) explains almost none of this — it's a genuine failure to transfer handwriting-style features across domains. READ2016 is the hardest target for every source (likely its distinct historical German/archival script); LAM is the easiest target but the worst source (its large, stylistically narrow training set generalizes outward worse than IAM's or READ2016's).
+**Finding**: cross-dataset CER (37–79%) is roughly 9–20x the target's in-domain CER (3–5%). Vocabulary mismatch (OOV rate 1–3.5%) explains almost none of this — it's a genuine failure to transfer handwriting-style features across domains. READ2016 is the hardest target (~79% CER from either other model) and LAM the easiest. As a source, the IAM model transfers best (57.7% mean CER); the READ2016 and LAM models are equally weak (64.4% and 64.0%).
 
 ### 6.2 Robustness to test-time corruption (`robustness_eval.py`, corrected v2)
 
@@ -100,7 +100,7 @@ LAM's 19,830-line training set was subsampled to 25%, 50%, and 75%, each trained
 - `cross_eval.py`, `robustness_eval.py` — the two extended-analysis scripts, reusable against any checkpoint in `output/`
 - `data/LAM/train_{25,50,75}pct.ln` — coverage-guaranteed subsampled training lists
 - `RESULTS.md` — full technical write-up (methods + tables) for all of the above
-- `HTR-VT_Presentation.pptx` — 21-slide deck for a 20-minute talk (see §9)
+- `HTR-VT_Presentation.pptx` — 21-slide deck for a 20-minute talk (see §8)
 
 ## 8. Presentation deck
 

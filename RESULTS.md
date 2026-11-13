@@ -13,7 +13,7 @@ Reproduction of ["HTR-VT: Handwritten Text Recognition with Vision Transformer"]
 
 ## 2. Main reproduction results
 
-Trained via `run/{read,lam,iam}.sh` (adapted for `--train-bs 32`, `--num-workers 8`), each for the paper's full 100,000 iterations.
+Trained via `run/{read,lam,iam}.sh` (adapted for `--train-bs 32`; `--num-workers 8` for LAM and IAM only, READ2016 ran with 0), each for the paper's full 100,000 iterations.
 
 | Dataset | Paper (bs=128) | Ours (bs=32) | CER Δ |
 |---|---|---|---|
@@ -43,7 +43,7 @@ Checkpoints: `output/{read,lam,iam}/best_CER.pth` (and `best_WER.pth`).
 | READ → IAM | 69.35% | 94.41% | 0.97% |
 | *(in-domain reference)* | *3-5%* | *8-16%* | — |
 
-**Finding**: cross-dataset CER (37-79%) is 10-20x worse than in-domain (3-5%). Since OOV rate is only 1-3.5%, vocabulary mismatch explains almost none of the gap — this is genuine failure to transfer handwriting-style features across domains, not a bookkeeping artifact. Two consistent asymmetries: **READ2016 is the hardest target for everyone** (~79% CER regardless of source, plausibly due to its distinct historical German/archival script), and **LAM is the easiest target but the worst source** — its large, stylistically narrow training set doesn't produce features that generalize outward as well as IAM's or READ2016's do.
+**Finding**: cross-dataset CER (37-79%) is roughly 9-20x the target's in-domain CER (3-5%). Since OOV rate is only 1-3.5%, vocabulary mismatch explains almost none of the gap — this is genuine failure to transfer handwriting-style features across domains, not a bookkeeping artifact. READ2016 is the hardest target (~79% CER from either other model) and LAM the easiest (48.0% on average). As a source, the IAM model transfers best (57.7% mean CER on the other two datasets); the READ2016 and LAM models are equally weak (64.4% and 64.0%), so LAM's much larger training set does not buy better transfer.
 
 ### 3.2 Robustness to test-time corruption
 
@@ -65,7 +65,7 @@ Checkpoints: `output/{read,lam,iam}/best_CER.pth` (and `best_WER.pth`).
 
 **Contrast is not learned robustness.** The model applies a parameter-free layer norm to every input image (`model/HTR_VT.py`, first line of `forward`), i.e. per-image standardization. torchvision's contrast reduction is an affine change of each image, which this removes exactly — hence identical CER at every level. (The earlier version of this document credited `ColorJitter`; that was wrong.)
 
-**Audit note — v1 of this experiment had three problems, now fixed**: (1) a fixed 5-px blur kernel truncated σ = 2 and 3 into nearly the same box filter, understating blur damage (IAM σ = 2: 19.0% in v1 vs 54.8% now); (2) rotation was applied to the padded 512×64 canvas, cutting off the line ends (31% of ink lost at 10° on sampled IAM lines) — kept as `rotate_canvas` for comparison (42.8–45.3% at 10° for all datasets); (3) no corruption in v1 was actually covered by training, so H3 could not be tested — stroke thickening/thinning and noise were added.
+**Audit note — v1 of this experiment had three problems, now fixed**: (1) a fixed 5-px blur kernel truncated σ = 2 and 3 into nearly the same box filter, understating blur damage (IAM σ = 2: 19.0% in v1 vs 54.8% now); (2) rotation was applied to the padded 512×64 canvas, cutting off the line ends (30.1% of ink lost at 10° over the IAM test set; reproduce with `report/audit_v1_checks.py`) — kept as `rotate_canvas` for comparison (42.8–45.3% at 10° for all datasets); (3) no corruption in v1 was actually covered by training, so H3 could not be tested — stroke thickening/thinning and noise were added.
 
 ### 3.3 Reduced training data (LAM data efficiency)
 

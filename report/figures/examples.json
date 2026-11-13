@@ -2012,112 +2012,530 @@
   }
  ],
  "reduced": {
-  "img": "figures/reduced_LAM.png",
-  "gt": "Bern.i meco si gode e sanità, e buon tem-",
-  "rows": [
+  "lines": [
    {
-    "pct": 25,
-    "gt": "Bern.i meco si gode e sanità, e buon tem-",
-    "pred": "Bern.i meco si gode e sanita, e buon tem-",
-    "gt_runs": [
-     [
-      "Bern.i meco si gode e sanit",
-      false
-     ],
-     [
-      "à",
-      true
-     ],
-     [
-      ", e buon tem-",
-      false
-     ]
+    "img": "figures/reduced_LAM_0.png",
+    "gt": "le feste. Nel Secolo XII. come ho mostrato non so in qual luogo delle",
+    "errors": [
+     5,
+     2,
+     1,
+     0
     ],
-    "pred_runs": [
-     [
-      "Bern.i meco si gode e sanit",
-      false
-     ],
-     [
-      "a",
-      true
-     ],
-     [
-      ", e buon tem-",
-      false
-     ]
-    ],
-    "cer": 2.4390243902439024
+    "rows": [
+     {
+      "pct": 25,
+      "gt": "le feste. Nel Secolo XII. come ho mostrato non so in qual luogo delle",
+      "pred": "le ferto. Nel Sacolo III. come ho mostrato non so in qual uogo delle",
+      "gt_runs": [
+       [
+        "le fe",
+        false
+       ],
+       [
+        "s",
+        true
+       ],
+       [
+        "t",
+        false
+       ],
+       [
+        "e",
+        true
+       ],
+       [
+        ". Nel S",
+        false
+       ],
+       [
+        "e",
+        true
+       ],
+       [
+        "colo ",
+        false
+       ],
+       [
+        "X",
+        true
+       ],
+       [
+        "II. come ho mostrato non so in qual ",
+        false
+       ],
+       [
+        "l",
+        true
+       ],
+       [
+        "uogo delle",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "le fe",
+        false
+       ],
+       [
+        "r",
+        true
+       ],
+       [
+        "t",
+        false
+       ],
+       [
+        "o",
+        true
+       ],
+       [
+        ". Nel S",
+        false
+       ],
+       [
+        "a",
+        true
+       ],
+       [
+        "colo ",
+        false
+       ],
+       [
+        "I",
+        true
+       ],
+       [
+        "II. come ho mostrato non so in qual uogo delle",
+        false
+       ]
+      ],
+      "cer": 7.246376811594203
+     },
+     {
+      "pct": 50,
+      "gt": "le feste. Nel Secolo XII. come ho mostrato non so in qual luogo delle",
+      "pred": "le festo. Nel Secolo III. come ho mostrato non so in qual luogo delle",
+      "gt_runs": [
+       [
+        "le fest",
+        false
+       ],
+       [
+        "e",
+        true
+       ],
+       [
+        ". Nel Secolo ",
+        false
+       ],
+       [
+        "X",
+        true
+       ],
+       [
+        "II. come ho mostrato non so in qual luogo delle",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "le fest",
+        false
+       ],
+       [
+        "o",
+        true
+       ],
+       [
+        ". Nel Secolo ",
+        false
+       ],
+       [
+        "I",
+        true
+       ],
+       [
+        "II. come ho mostrato non so in qual luogo delle",
+        false
+       ]
+      ],
+      "cer": 2.898550724637681
+     },
+     {
+      "pct": 75,
+      "gt": "le feste. Nel Secolo XII. come ho mostrato non so in qual luogo delle",
+      "pred": "le festo. Nel Secolo XII. come ho mostrato non so in qual luogo delle",
+      "gt_runs": [
+       [
+        "le fest",
+        false
+       ],
+       [
+        "e",
+        true
+       ],
+       [
+        ". Nel Secolo XII. come ho mostrato non so in qual luogo delle",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "le fest",
+        false
+       ],
+       [
+        "o",
+        true
+       ],
+       [
+        ". Nel Secolo XII. come ho mostrato non so in qual luogo delle",
+        false
+       ]
+      ],
+      "cer": 1.4492753623188406
+     },
+     {
+      "pct": 100,
+      "gt": "le feste. Nel Secolo XII. come ho mostrato non so in qual luogo delle",
+      "pred": "le feste. Nel Secolo XII. come ho mostrato non so in qual luogo delle",
+      "gt_runs": [
+       [
+        "le feste. Nel Secolo XII. come ho mostrato non so in qual luogo delle",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "le feste. Nel Secolo XII. come ho mostrato non so in qual luogo delle",
+        false
+       ]
+      ],
+      "cer": 0.0
+     }
+    ]
    },
    {
-    "pct": 50,
-    "gt": "Bern.i meco si gode e sanità, e buon tem-",
-    "pred": "Bern.i meco si gode e sanita, e buon tem-",
-    "gt_runs": [
-     [
-      "Bern.i meco si gode e sanit",
-      false
-     ],
-     [
-      "à",
-      true
-     ],
-     [
-      ", e buon tem-",
-      false
-     ]
+    "img": "figures/reduced_LAM_1.png",
+    "gt": "avesse maniera di sciogliere il gruppo. Potrebbe anche vedere le Dis=",
+    "errors": [
+     4,
+     2,
+     1,
+     0
     ],
-    "pred_runs": [
-     [
-      "Bern.i meco si gode e sanit",
-      false
-     ],
-     [
-      "a",
-      true
-     ],
-     [
-      ", e buon tem-",
-      false
-     ]
-    ],
-    "cer": 2.4390243902439024
+    "rows": [
+     {
+      "pct": 25,
+      "gt": "avesse maniera di sciogliere il gruppo. Potrebbe anche vedere le Dis=",
+      "pred": "avesse manieraà di sciogiere il gruppo. Potrebbe ancho vedere la Dis=",
+      "gt_runs": [
+       [
+        "avesse maniera di sciog",
+        false
+       ],
+       [
+        "l",
+        true
+       ],
+       [
+        "iere il gruppo. Potrebbe anch",
+        false
+       ],
+       [
+        "e",
+        true
+       ],
+       [
+        " vedere l",
+        false
+       ],
+       [
+        "e",
+        true
+       ],
+       [
+        " Dis=",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "avesse maniera",
+        false
+       ],
+       [
+        "à",
+        true
+       ],
+       [
+        " di sciogiere il gruppo. Potrebbe anch",
+        false
+       ],
+       [
+        "o",
+        true
+       ],
+       [
+        " vedere l",
+        false
+       ],
+       [
+        "a",
+        true
+       ],
+       [
+        " Dis=",
+        false
+       ]
+      ],
+      "cer": 5.797101449275362
+     },
+     {
+      "pct": 50,
+      "gt": "avesse maniera di sciogliere il gruppo. Potrebbe anche vedere le Dis=",
+      "pred": "avesse maniera di sciogiere il gruppo. Potrebbe ancho vedere le Dis=",
+      "gt_runs": [
+       [
+        "avesse maniera di sciog",
+        false
+       ],
+       [
+        "l",
+        true
+       ],
+       [
+        "iere il gruppo. Potrebbe anch",
+        false
+       ],
+       [
+        "e",
+        true
+       ],
+       [
+        " vedere le Dis=",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "avesse maniera di sciogiere il gruppo. Potrebbe anch",
+        false
+       ],
+       [
+        "o",
+        true
+       ],
+       [
+        " vedere le Dis=",
+        false
+       ]
+      ],
+      "cer": 2.898550724637681
+     },
+     {
+      "pct": 75,
+      "gt": "avesse maniera di sciogliere il gruppo. Potrebbe anche vedere le Dis=",
+      "pred": "avesse maniera di sciogiere il gruppo. Potrebbe anche vedere le Dis=",
+      "gt_runs": [
+       [
+        "avesse maniera di sciog",
+        false
+       ],
+       [
+        "l",
+        true
+       ],
+       [
+        "iere il gruppo. Potrebbe anche vedere le Dis=",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "avesse maniera di sciogiere il gruppo. Potrebbe anche vedere le Dis=",
+        false
+       ]
+      ],
+      "cer": 1.4492753623188406
+     },
+     {
+      "pct": 100,
+      "gt": "avesse maniera di sciogliere il gruppo. Potrebbe anche vedere le Dis=",
+      "pred": "avesse maniera di sciogliere il gruppo. Potrebbe anche vedere le Dis=",
+      "gt_runs": [
+       [
+        "avesse maniera di sciogliere il gruppo. Potrebbe anche vedere le Dis=",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "avesse maniera di sciogliere il gruppo. Potrebbe anche vedere le Dis=",
+        false
+       ]
+      ],
+      "cer": 0.0
+     }
+    ]
    },
    {
-    "pct": 75,
-    "gt": "Bern.i meco si gode e sanità, e buon tem-",
-    "pred": "Bern.i meco si gode e sanità, e buon tem-",
-    "gt_runs": [
-     [
-      "Bern.i meco si gode e sanità, e buon tem-",
-      false
-     ]
+    "img": "figures/reduced_LAM_2.png",
+    "gt": "Inscriptionum, di cui già è uscito il Tomo I.",
+    "errors": [
+     3,
+     2,
+     1,
+     0
     ],
-    "pred_runs": [
-     [
-      "Bern.i meco si gode e sanità, e buon tem-",
-      false
-     ]
-    ],
-    "cer": 0.0
-   },
-   {
-    "pct": 100,
-    "gt": "Bern.i meco si gode e sanità, e buon tem-",
-    "pred": "Bern.i meco si gode e sanità, e buon tem-",
-    "gt_runs": [
-     [
-      "Bern.i meco si gode e sanità, e buon tem-",
-      false
-     ]
-    ],
-    "pred_runs": [
-     [
-      "Bern.i meco si gode e sanità, e buon tem-",
-      false
-     ]
-    ],
-    "cer": 0.0
+    "rows": [
+     {
+      "pct": 25,
+      "gt": "Inscriptionum, di cui già è uscito il Tomo I.",
+      "pred": "Inscriprtionum, di cui già è uscito il Tomol.",
+      "gt_runs": [
+       [
+        "Inscriptionum, di cui già è uscito il Tomo",
+        false
+       ],
+       [
+        " I",
+        true
+       ],
+       [
+        ".",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "Inscrip",
+        false
+       ],
+       [
+        "r",
+        true
+       ],
+       [
+        "tionum, di cui già è uscito il Tomo",
+        false
+       ],
+       [
+        "l",
+        true
+       ],
+       [
+        ".",
+        false
+       ]
+      ],
+      "cer": 6.666666666666667
+     },
+     {
+      "pct": 50,
+      "gt": "Inscriptionum, di cui già è uscito il Tomo I.",
+      "pred": "Inscripzionum, di cui già è uscito il Tomo i.",
+      "gt_runs": [
+       [
+        "Inscrip",
+        false
+       ],
+       [
+        "t",
+        true
+       ],
+       [
+        "ionum, di cui già è uscito il Tomo ",
+        false
+       ],
+       [
+        "I",
+        true
+       ],
+       [
+        ".",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "Inscrip",
+        false
+       ],
+       [
+        "z",
+        true
+       ],
+       [
+        "ionum, di cui già è uscito il Tomo ",
+        false
+       ],
+       [
+        "i",
+        true
+       ],
+       [
+        ".",
+        false
+       ]
+      ],
+      "cer": 4.444444444444445
+     },
+     {
+      "pct": 75,
+      "gt": "Inscriptionum, di cui già è uscito il Tomo I.",
+      "pred": "Inscriprionum, di cui già è uscito il Tomo I.",
+      "gt_runs": [
+       [
+        "Inscrip",
+        false
+       ],
+       [
+        "t",
+        true
+       ],
+       [
+        "ionum, di cui già è uscito il Tomo I.",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "Inscrip",
+        false
+       ],
+       [
+        "r",
+        true
+       ],
+       [
+        "ionum, di cui già è uscito il Tomo I.",
+        false
+       ]
+      ],
+      "cer": 2.2222222222222223
+     },
+     {
+      "pct": 100,
+      "gt": "Inscriptionum, di cui già è uscito il Tomo I.",
+      "pred": "Inscriptionum, di cui già è uscito il Tomo I.",
+      "gt_runs": [
+       [
+        "Inscriptionum, di cui già è uscito il Tomo I.",
+        false
+       ]
+      ],
+      "pred_runs": [
+       [
+        "Inscriptionum, di cui già è uscito il Tomo I.",
+        false
+       ]
+      ],
+      "cer": 0.0
+     }
+    ]
    }
   ],
   "exact_lines": {
@@ -2125,6 +2543,11 @@
    "50": 55.35055350553506,
    "75": 57.649730343457286,
    "100": 58.04711893272779
-  }
+  },
+  "n_lines": 3523,
+  "n_strict": 19,
+  "n_better": 826,
+  "n_worse": 307,
+  "n_same": 2390
  }
 }

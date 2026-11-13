@@ -347,6 +347,8 @@ def run_inference_sections():
         print(ds, 'in-domain CER check: %.2f%%' %
               (100 * sum(editdistance.eval(p, g) for p, g in zip(preds, gts)) / sum(len(g) for g in gts)))
         analysis[ds] = error_analysis(gts, preds)
+        json.dump(dict(fns=fns, gts=gts, preds=preds), open(f'{FIG}/predictions_{ds}.json', 'w'),
+                  ensure_ascii=False)
 
         order = np.argsort(cers, kind='stable')
         nonzero = [i for i in order if cers[i] > 0]
@@ -410,13 +412,24 @@ def run_inference_sections():
         frac_preds[pct] = predict_arrays(m, c, arrays)
         del m
         torch.cuda.empty_cache()
-    cand = [i for i in range(len(gts)) if frac_preds[100][i] == gts[i] and frac_preds[25][i] != gts[i]]
-    i = pick_line(cand, gts)
-    examples['reduced'] = dict(
-        img=save_line(fns[i], 'reduced_LAM'), gt=gts[i],
-        rows=[dict(pct=p, **annotate(gts[i], frac_preds[p][i])) for p, _ in FRACTIONS])
-    exact = {p: 100 * np.mean([a == b for a, b in zip(frac_preds[p], gts)]) for p, _ in FRACTIONS}
-    examples['reduced']['exact_lines'] = exact
+    # lines whose error count drops at every step and that the 100% model reads perfectly;
+    # '#' marks struck-out text in LAM's annotation, so those lines are excluded
+    ed = {p: [editdistance.eval(frac_preds[p][i], gts[i]) for i in range(len(gts))] for p, _ in FRACTIONS}
+    pcts = [p for p, _ in FRACTIONS]
+    strict = [i for i in range(len(gts))
+              if all(ed[a][i] > ed[b][i] for a, b in zip(pcts, pcts[1:]))]
+    chosen = sorted([i for i in strict if ed[100][i] == 0 and '#' not in gts[i]],
+                    key=lambda i: -ed[25][i])[:3]
+    examples['reduced'] = dict(lines=[
+        dict(img=save_line(fns[i], f'reduced_LAM_{k}'), gt=gts[i], errors=[ed[p][i] for p in pcts],
+             rows=[dict(pct=p, **annotate(gts[i], frac_preds[p][i])) for p in pcts])
+        for k, i in enumerate(chosen)])
+    better = sum(ed[100][i] < ed[25][i] for i in range(len(gts)))
+    worse = sum(ed[100][i] > ed[25][i] for i in range(len(gts)))
+    examples['reduced'].update(
+        exact_lines={p: 100 * np.mean([a == b for a, b in zip(frac_preds[p], gts)]) for p in pcts},
+        n_lines=len(gts), n_strict=len(strict), n_better=better, n_worse=worse,
+        n_same=len(gts) - better - worse)
 
     # paired bootstrap over test lines (95% intervals, 2000 resamples)
     def edits(preds, gts):

@@ -5,6 +5,7 @@
 #let E = json("figures/examples.json")
 #let A = json("figures/error_analysis.json")
 #let B = json("figures/bootstrap.json")
+#let V1 = json("figures/audit_v1.json")
 
 #let navy = rgb("#1E2761")
 #let muted = rgb("#5A5A66")
@@ -107,8 +108,8 @@ This report documents a complete reproduction of HTR-VT on IAM, READ2016 and LAM
 #table(columns: (auto, 1fr), inset: (x: 3pt, y: 3pt),
   [*RQ1* Reproduction], [All three datasets reproduce within the 1-point target: IAM #pc(M.main.IAM.cer) (paper 4.7%), READ2016 #pc(M.main.READ.cer) (3.9%), LAM #pc(M.main.LAM.cer) (2.8%) CER, at a quarter of the paper's batch size.],
   [*RQ2 / H1* Less data], [Confirmed. LAM CER falls monotonically from #pc(M.reduced.at(0).cer) (25%) to #pc(M.reduced.at(3).cer) (100%) with strongly diminishing returns; the 75% → 100% step is within test-sample noise.],
-  [*RQ3 / H2* Transfer], [Confirmed. Cross-dataset CER is 37–79%, 10–20× the in-domain error, while only 1–3.5% of target characters are missing from the source vocabulary.],
-  [*RQ4 / H3* Corruption], [Confirmed after correcting the experiment: stroke-width changes of the strength used in training cost at most 0.6 points, while blur, rotation and noise — never seen in training — cost more even at their mildest level and push CER to 18–91% at moderate levels. The protection does not extend beyond the trained range. Contrast is a special case: the model is exactly invariant by construction.],
+  [*RQ3 / H2* Transfer], [Confirmed. Cross-dataset CER is 37–79%, roughly 9–20× the in-domain error of the target dataset, while only 1–3.5% of target characters are missing from the source vocabulary.],
+  [*RQ4 / H3* Corruption], [Confirmed after correcting the experiment: stroke-width changes of the strength used in training cost at most 0.6 points, while blur, rotation and noise — never seen in training — cost more even at their mildest level and push CER to 18–66% at moderate levels (up to 91% at the strongest). The protection does not extend beyond the trained range. Contrast is a special case: the model is invariant by construction (to within 0.02 points).],
 )
 ]
 
@@ -185,7 +186,7 @@ All three datasets were converted to the flat layout the code expects (`lines/<i
 
 The batch size had to drop from 128 to 32 to fit in 12 GB. A short smoke run confirmed stable, decreasing loss before the full runs were committed, and the iteration budget was kept at 100,000, so each run sees a quarter of the paper's samples. Mixed precision was deliberately *not* used so the numerics stay comparable with the reference.
 
-Two changes that affect only speed, not results, were made after the first run had started: data-loading workers were raised from 0 to 8 (monitoring showed the GPU idling at 59–87% utilization while waiting for CPU-side augmentation), and `cudnn.benchmark` was enabled. READ2016 therefore trained for 29.8 hours, LAM and IAM for about 24.5 hours each (the paper reports about 16 hours on its RTX 4090). A system reboot killed one later run (LAM 75%) at iteration 83,900; because the code cannot resume from a checkpoint it was restarted from zero, and a cron `@reboot` watchdog was added to restart automatically in future.
+Two changes that affect only speed, not results, were made after the first run had started: data-loading workers were raised from 0 to 8 (monitoring showed the GPU idling at 59–87% utilization while waiting for CPU-side augmentation), and `cudnn.benchmark` was enabled. READ2016 therefore trained for about 30 hours, LAM and IAM for about 24.5 hours each (the paper reports about 16 hours on its RTX 4090). A system reboot killed one later run (LAM 75%) at iteration 83,900; because the code cannot resume from a checkpoint it was restarted from zero, and a cron `@reboot` watchdog was added to restart automatically in future.
 
 The checkpoint with the lowest *validation* CER (evaluated every 1,000 iterations) is the one tested; the test set is touched once per model. @fig:curves shows the validation curves: all runs converge smoothly and are still improving slowly at the end, as expected from the cosine schedule.
 
@@ -226,7 +227,7 @@ Aggregate CER hides what the model actually outputs. The tables below show, for 
   )
 }
 
-Two patterns stand out. Typical errors are one or two characters inside otherwise correct lines — a confusable letter pair or a dropped short word — which is why WER is roughly three to four times CER: one wrong character makes a whole word wrong. And in all three datasets the single worst line is not ordinary handwriting: an IAM line whose ground truth is a row of dashes although the image clearly shows two handwritten words (a labelling error in the data), a three-digit page number in READ2016 ("226" read as "336"), where each misread digit costs 33 points of CER, and in LAM a struck-out word that the annotation replaces by `#` but the model reads anyway (Section 5).
+Two patterns stand out. Typical errors are one or two characters inside otherwise correct lines — a confusable letter pair or a dropped short word — which is why WER is 2.7–4.3 times CER: one wrong character makes a whole word wrong. And in all three datasets the single worst line is not ordinary handwriting: an IAM "line" that is actually the "Sentence Database" title of the IAM form, wrongly segmented as a text line and labelled as a row of dashes, a three-digit page number in READ2016 ("226" read as "336"), where each misread digit costs 33 points of CER, and in LAM a struck-out word that the annotation replaces by `#` but the model reads anyway (Section 5).
 
 // ---------------------------------------------------------------- 4
 
@@ -258,10 +259,14 @@ Two patterns stand out. Typical errors are one or two characters inside otherwis
 *Result.* CER falls monotonically, and each additional quarter of data buys less than the previous one: #fmt(rd.at(0).mean) points (25% → 50%), #fmt(rd.at(1).mean) points (50% → 75%) and #fmt(rd.at(2).mean) points (75% → 100%). A paired bootstrap over test lines puts the last gain at #fmt(rd.at(2).lo) to #fmt(rd.at(2).hi) points (95% interval)#if rd.at(2).lo <= 0 [, an interval that includes zero: on this test set the 75% and 100% models cannot be distinguished] else [, small but distinguishable from zero]. The first two gains are clearly significant (intervals #fmt(rd.at(0).lo)–#fmt(rd.at(0).hi) and #fmt(rd.at(1).lo)–#fmt(rd.at(1).hi)). *H1 is confirmed.* To put the numbers in context with the paper's LAM table: the 25% model (about 5,000 lines, #pc(M.reduced.at(0).cer)) already beats ViT (6.1%), DeiT (5.9%), GFCN (5.2%) and CNN+BLSTM (5.8%) trained on all the data, and the 50% model (#pc(M.reduced.at(1).cer)) also beats CRNN (3.8%) and TrOCR (3.6%, which uses extra training data). This supports the paper's data-efficiency claim in a dimension the paper itself never tested.
 
 #let red = E.reduced
-#figure(
-  side-by-side(red.rows.map(r => r + (img: red.img)), tag: r => [#r.pct% data]),
-  caption: [One LAM test line transcribed by the four models (selected by a fixed rule among typical-length lines that the 100% model reads correctly and the 25% model does not, so it illustrates the difference rather than the average case). Share of test lines transcribed perfectly: #("25", "50", "75", "100").map(p => [#p%: #pc(red.exact_lines.at(p), d: 1)]).join(", ").],
-)
+*What the gain looks like on individual lines.* The figures below follow three LAM test lines through all four models. They were chosen by a fixed rule: the number of character errors must drop at *every* step, and the 100% model must read the line perfectly. Lines like this are rare — only #red.n_strict of #thou(red.n_lines) test lines improve at every step — because most lines are either already correct with 25% of the data or stay difficult for all four models. Comparing just the 25% and 100% models, #thou(red.n_better) lines get better, #thou(red.n_worse) get worse and #thou(red.n_same) are unchanged; the average gain comes from many small, sometimes cancelling changes. Share of test lines transcribed perfectly: #("25", "50", "75", "100").map(p => [#p%: #pc(red.exact_lines.at(p), d: 1)]).join(", ").
+
+#for (k, ex) in red.lines.enumerate() {
+  figure(
+    side-by-side(ex.rows.map(r => r + (img: ex.img)), tag: r => [#r.pct% data]),
+    caption: [LAM test line #(k + 1) read by the four data-fraction models. Character errors: #ex.errors.map(e => str(e)).join(" → ") (25% → 50% → 75% → 100%).],
+  )
+}
 
 == Transfer to another dataset (RQ3, H2)
 
@@ -285,7 +290,7 @@ Two patterns stand out. Typical errors are one or two characters inside otherwis
 
 #figure(image("figures/cross_heatmap.svg", width: 50%), caption: [CER (%) for every source/target pair; the diagonal is in-domain.]) <fig:cross>
 
-*Result.* Transfer fails across the board: 37–79% CER instead of 3–5%. The OOV rate (1–3.5%) explains only a small fraction of that gap, so the failure is genuinely about handwriting style, not bookkeeping. *H2 is confirmed.* Two asymmetries are consistent: READ2016 (Early Modern German council records) is the hardest target for every source, around 79% CER; and LAM is the easiest target but the weakest source, i.e. its large but stylistically narrow training set does not produce features that generalize outward. The examples below show what "transfer" looks like in practice: the model still produces plausible character strings in its own training language, which is why WER sits near 100%.
+*Result.* Transfer fails across the board: 37–79% CER instead of 3–5%. The OOV rate (1–3.5%) explains only a small fraction of that gap, so the failure is genuinely about handwriting style, not bookkeeping. *H2 is confirmed.* READ2016 (Early Modern German council records) is the hardest target for both other models, around 79% CER, and LAM the easiest (48.0% on average). As a source, the IAM model transfers best (57.7% mean CER on the other two datasets); the READ2016 and LAM models are equally weak (64.4% and 64.0%), so the much larger LAM training set does not buy better transfer. The examples below show what "transfer" looks like in practice: the model still produces plausible character strings in its own training language, which is why WER sits near 100%.
 
 #for t in names {
   let ex = E.cross.at(t)
@@ -297,7 +302,7 @@ Two patterns stand out. Typical errors are one or two characters inside otherwis
 
 == Corrupted test images (RQ4, H3) <sec:robust>
 
-*Setup.* Corruptions are applied to each model's own test set at inference time only; no retraining is involved. H3 predicts that corruptions the training augmentation covers hurt less than those it does not, so the corruptions are grouped accordingly. The training pipeline applies a mild perspective warp, stroke-width changes (erosion/dilation with a kernel of at most 2 px) and colour jitter; it never blurs, rotates or adds noise.
+*Setup.* Corruptions are applied to each model's own test set at inference time only; no retraining is involved. H3 predicts that corruptions the training augmentation covers hurt less than those it does not, so the corruptions are grouped accordingly. The training pipeline applies a mild perspective warp, stroke-width changes (erosion/dilation with a kernel of at most 2 px) and colour jitter; it never blurs or adds noise. It does not rotate either, but its perspective warp moves the line corners up and down by up to 8 px, which tilts a 512-px line by up to about 1.8° — so the 2° rotation level sits at the edge of what training shows, and only 5° and 10° are clearly uncovered.
 
 - *Not covered by training:* Gaussian blur (σ = 1, 2, 3 px at model resolution, kernel 2⌈3σ⌉+1), rotation (2°, 5°, 10°; the raw line is rotated with its bounding box expanded before resizing, as a skewed line from a segmenter would look), Gaussian pixel noise (σ = 0.05, 0.1, 0.2).
 - *Covered by training:* stroke thickening and thinning with kernels of 2 px (the training range), 3 and 4 px (beyond it).
@@ -327,7 +332,7 @@ Two patterns stand out. Typical errors are one or two characters inside otherwis
 
 #figure(image("figures/robustness.svg", width: 100%), caption: [CER versus corruption severity; severity 0 (or contrast 1.0) is the clean test set.]) <fig:robust>
 
-*Result.* Corruptions covered by training cost almost nothing at the strength training uses: thickening or thinning strokes by 2 px raises CER by only 0.14–0.63 points. Every uncovered corruption costs more even at its mildest level — blur σ = 1: +0.6 to +2.0 points, rotation 2°: +0.4 to +2.1, noise σ = 0.05: +2.4 to +8.3 — and this holds within each dataset. At moderate levels the uncovered corruptions are destructive: blur σ = 2 gives 18.6–54.8% CER, noise σ = 0.1 gives 25.2–45.7%, and a 10° tilt 20.4–66.0%. *H3 is confirmed.* (Severities of different corruption types have no common scale, so the comparison rests on the mildest level of each type.)
+*Result.* Corruptions covered by training cost almost nothing at the strength training uses: thickening or thinning strokes by 2 px raises CER by only 0.14–0.63 points. Every uncovered corruption costs more even at its mildest level — blur σ = 1: +0.6 to +2.0 points, noise σ = 0.05: +2.4 to +8.3 (and rotation 2°, which training nearly covers: +0.4 to +2.1) — and this holds within each dataset. At moderate levels the uncovered corruptions are destructive: blur σ = 2 gives 18.6–54.8% CER, noise σ = 0.1 gives 25.2–45.7%, and a 10° tilt 20.4–66.0%. *H3 is confirmed.* (Severities of different corruption types have no common scale, so the comparison rests on the mildest level of each type.)
 
 Three further observations qualify the result:
 
@@ -335,7 +340,7 @@ Three further observations qualify the result:
 - *Rotation depends on line length.* READ2016 is far more robust to rotation (20.4% at 10°) than IAM (60.7%) and LAM (66.0%). READ2016 lines are short (median 21 characters, against 43 and 39), so tilting them barely enlarges their bounding box, whereas a long tilted line needs a much taller box and its letters shrink when the box is scaled to the fixed 64-pixel input height. The flawed first version, which rotated the padded canvas, reported a uniform 42.8–45.3% for all three datasets — an artifact of clipping that hid this difference.
 - *IAM is the most fragile dataset* under almost every corruption, consistent with it having the fewest training lines (6,482).
 
-Contrast reduction leaves CER unchanged to within 0.01 points at every level. This is not robustness learned from data: the input standardization removes any change of the form _a_ · image + _b_ before the network sees it, and torchvision's contrast reduction is exactly such a change.
+Contrast reduction leaves CER unchanged to within 0.02 points at every level. This is not robustness learned from data: the input standardization removes any change of the form _a_ · image + _b_ before the network sees it (up to the small constant ε = 10#super[−5] in the normalization), and torchvision's contrast reduction is exactly such a change.
 
 #figure(
   side-by-side(E.corruption, tag: r => [#r.corruption #if r.corruption != "clean" [#r.severity]], h: 0.95cm),
@@ -408,9 +413,9 @@ Before writing this report, every experiment was re-checked against its code, it
     [Split integrity], [No image file appears in two splits of any dataset. Identical _transcriptions_ do recur between train and test (IAM 0.1%, READ2016 6.9%, LAM 6.1% of test lines), which is inherent to the official splits (short formulaic lines), not introduced here.], ok,
     [Reduced-data subsets], [Each subset is a duplicate-free subset of the official training list, disjoint from validation and test, with exactly the full 89-character alphabet. Subsets were drawn independently rather than nested.], ok,
     [Cross-dataset evaluation], [Checkpoints load with strict key and shape matching (an earlier class-count mismatch was fixed before any results were reported). A full re-run on 14 October reproduced all six pairs to two decimals.], ok,
-    [Robustness: contrast], [The model standardizes every input image (`layer_norm` over the whole image, `model/HTR_VT.py`). Contrast reduction, as implemented by torchvision, is an affine change of each image, which this standardization removes exactly. The flat contrast curve was earlier credited to the colour-jitter augmentation; that explanation was wrong. Contrast is now reported only as a control.], fixed,
-    [Robustness: blur], [The first version used a fixed 5-pixel kernel. For σ = 2 and 3 this truncates the Gaussian to nearly the same box filter, so the labelled severities were overstated and the damage understated (IAM σ = 2: 19.0% before, #pc(sev("IAM", "blur", "2.0"), d: 1) correctly). Kernel is now 2⌈3σ⌉+1.], fixed,
-    [Robustness: rotation], [The first version rotated the padded 64 × 512 canvas, which cuts off the line ends: at 10°, 31% of the ink pixels of a sample of IAM lines left the image, so part of the "error" was deleted text. Now the raw line is rotated with an expanded bounding box. The old variant is kept as `rotate_canvas` to quantify the artifact.], fixed,
+    [Robustness: contrast], [The model standardizes every input image (`layer_norm` over the whole image, `model/HTR_VT.py`). Contrast reduction, as implemented by torchvision, is an affine change of each image, which this standardization removes up to a negligible numerical constant. The flat contrast curve was earlier credited to the colour-jitter augmentation; that explanation was wrong. Contrast is now reported only as a control.], fixed,
+    [Robustness: blur], [The first version used a fixed 5-pixel kernel. For σ = 2 and 3 this truncates the Gaussian to nearly the same box filter, so the labelled severities were overstated and the damage understated (IAM σ = 1/2/3: #V1.iam_blur.values().map(v => fmt(v.v1_cer)).join(" / ")% with the old kernel versus #V1.iam_blur.values().map(v => fmt(v.v2_cer)).join(" / ")% corrected; both reproduced by `report/audit_v1_checks.py`). Kernel is now 2⌈3σ⌉+1.], fixed,
+    [Robustness: rotation], [The first version rotated the padded 64 × 512 canvas, which cuts off the line ends: at 10°, #pc(V1.canvas_rotation_ink_lost_pct.at("10"), d: 1) of the ink pixels of the IAM test set left the image (#pc(V1.canvas_rotation_ink_lost_pct.at("5"), d: 1) at 5°), so part of the "error" was deleted text. Now the raw line is rotated with an expanded bounding box. The old variant is kept as `rotate_canvas` to quantify the artifact.], fixed,
     [Robustness: H3 design], [Blur, rotation and contrast alone could not test H3: no corruption in the set was genuinely covered by training. Stroke thickening/thinning (the training's own erosion/dilation) and pixel noise were added.], fixed,
     [Inherited code quirks], [Left unchanged to stay faithful to the authors' code: the training loop runs 99,999 rather than 100,000 iterations; the `--blur` options in `utils/option.py` are never used; the label converter special-cases an 87-character alphabet (READ2016) so that `[` and `]` can never be output; the paper lists elastic distortion among the augmentations, but the released code defines it and never applies it; hue and saturation jitter do nothing on greyscale images, and brightness/contrast jitter are largely cancelled by the input standardization.], note,
     table.hline(),
@@ -420,17 +425,36 @@ Before writing this report, every experiment was re-checked against its code, it
 
 // ---------------------------------------------------------------- 7
 
+== Independent validation by LLM judges
+
+To check the evaluation beyond my own audit, five independent LLM judges (Claude subagents) were each given one part of the evaluation, the raw files, and no access to my conclusions. Each was asked to find discrepancies, not to confirm results.
+
+#figure(
+  { set par(justify: false); table(columns: (auto, 0.8fr, 1.5fr), align: (left, left, left),
+    table.hline(),
+    th([Judge], [Task], [Finding]),
+    table.hline(stroke: 0.4pt),
+    [Code and metrics], [Read all evaluation code; recompute CER/WER with its own edit-distance implementation; re-run in-domain inference; check every corruption on real images.], [*No critical discrepancy.* All test CER/WER values reproduce (e.g. IAM 6,507 edits / 125,615 characters = 5.180%; all four LAM fractions). All scripts aggregate CER over characters as in the paper, decode identically, and the bootstrap is correctly paired. Four minor issues, all now reflected in this report: training's perspective warp already tilts lines by up to ≈1.8°; the white rotation fill on grey LAM backgrounds; contrast invariance is approximate (ε in the normalization); READ2016's clean CER varies by 0.01 between batch sizes.],
+    [Numbers and claims], [Compare every number in this report, `RESULTS.md`, `PROJECT_REPORT.md` and the slide deck with the logs, JSON files and the paper.], [All test, bootstrap, cross-dataset, robustness, epoch and dataset numbers match. Corrected after the check: "LAM is the weakest source" (READ2016 and LAM are equally weak; IAM transfers best), READ2016 training time (≈30 h, not 29.8 h), and loosely stated ranges (now 9–20×, 2.7–4.3×, 18–66%). The slide deck predates the corrected robustness study and is out of date.],
+    [Images: IAM, READ2016, LAM], [Look at 74 sampled test images (per dataset 10 random lines, 10 random error lines, the 5 worst) and judge ground truth, prediction and the per-line edit distance.], [*Edit distance correct on all 74 lines.* Labels are reliable on ordinary lines, but several high-error lines are label problems: IAM's worst line is a mis-segmented form title; two IAM and two LAM labels contain errors the model got right (e.g. LAM "mormorado" for the clearly written "mormorando", verified); in READ2016 about half of the remaining errors are uncertain full stops or spaces, and one crop cuts off part of its labelled word.],
+    table.hline(),
+  ) },
+  caption: [Independent validation of the evaluation by LLM judges.],
+) <tab:judges>
+
+The image judges also exposed how much LAM's annotation convention costs: struck-out or illegible words are written as a single `#`, and the model transcribes them anyway. The #thou(276) test lines that contain `#` produce 31.7% of all LAM character errors; without them LAM's CER would be 2.26% instead of 3.06%. The reported numbers follow each dataset's standard protocol and remain comparable with the paper, but they overstate the model's actual misreadings somewhat, mostly through a few label and segmentation outliers. LLM judges can themselves misread difficult historical script; their verdicts were used to locate problems, and the two that changed the text of this report were checked by hand.
+
 = Limitations
 
 - *One run per configuration.* Each model was trained once (about one GPU-day each), so the variation between training runs is unknown. The bootstrap intervals cover only test-sample variation, and small differences — notably the 75% vs. 100% LAM gap — should be read with that in mind.
 - *Batch size.* All models use batch 32 instead of 128, which plausibly explains most of the small IAM and LAM gaps but was not isolated experimentally.
 - *IAM source.* The IAM data comes from the Teklia mirror. Split sizes and alphabet match the official split, but file-level identity could not be verified.
-- *Synthetic corruptions.* Blur, rotation, noise and stroke-width changes are approximations of real scanning and writing variation, applied only at test time. Rotation additionally interacts with the fixed 64-pixel input height (a skewed line's bounding box is taller, so the glyphs shrink).
+- *Synthetic corruptions.* Blur, rotation, noise and stroke-width changes are approximations of real scanning and writing variation, applied only at test time. Rotation additionally interacts with the fixed 64-pixel input height (a skewed line's bounding box is taller, so the glyphs shrink), and the corners it uncovers are filled with white while LAM and READ2016 have grey parchment backgrounds. An independent re-run of LAM with each image's own background colour as fill gave 15.7% CER at 5° (instead of 13.6%) and 59.6% at 10° (instead of 66.0%): the rotation numbers carry a few points of such artifacts, although no conclusion changes.
 - *Scope.* Three Latin-script datasets, pre-segmented lines, greedy CTC decoding without a language model, and no repetition of the paper's component ablations.
 
 = Reproducibility
 
-All code is in the repository. `run_queue.sh` trains and tests the three main models; `run_reduced_data_queue.sh` the reduced-data models (subset lists in `data/LAM/train_{25,50,75}pct.ln`); `cross_eval.py` and `robustness_eval.py` run the two inference-only studies; `view_test_results.py` and `predict.py` show transcriptions for test-set or arbitrary line images; and `report/make_figures.py` regenerates every figure, table value and example in this report from the logs and checkpoints, followed by `typst compile report/report.typ`.
+All code is in the repository. `run_queue.sh` trains and tests the three main models; `run_reduced_data_queue.sh` the reduced-data models (subset lists in `data/LAM/train_{25,50,75}pct.ln`); `cross_eval.py` and `robustness_eval.py` run the two inference-only studies; `view_test_results.py` and `predict.py` show transcriptions for test-set or arbitrary line images; `report/make_figures.py` regenerates every figure, table value and example in this report from the logs and checkpoints, and `report/audit_v1_checks.py` reproduces the numbers quoted for the flawed first robustness version, followed by `typst compile report/report.typ`.
 
 = References
 
